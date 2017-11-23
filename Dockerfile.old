@@ -1,0 +1,11 @@
+FROM lpbrochu/shiny_base
+
+ADD install_packages.R /tmp/install_packages.R
+ADD server.R /server.R
+ADD ui.R /ui.R
+ADD run.R /run.R
+#RUN apt-get update
+#RUN apt-get install openssl libssl-dev -y
+RUN Rscript /tmp/install_packages.R
+#EXPOSE 8888
+CMD ["Rscript", "/run.R"]
