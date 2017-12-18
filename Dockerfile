@@ -1,11 +1,9 @@
-FROM rocker/shiny:latest
+FROM rocker/r-base:latest
 
 #adds server.R, ui.R, and source files to project directory
-ADD . /srv/shiny-server/shinyapp_docker
+ADD . /
 
 #loads necessary packages
-RUN sudo R -e "install.packages(c('shiny','ggplot2'))"
+RUN Rscript install_packages.R
 
-EXPOSE 3838
-
-CMD ["/usr/bin/shiny-server.sh"]
+CMD ["Rscript", "/deploy.R"]
